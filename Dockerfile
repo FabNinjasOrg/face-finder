@@ -25,7 +25,7 @@ RUN npm run build
 
 # Step 3: PHP-FPM
 
-FROM php:8.2-fpm
+FROM php:8.2.35-fpm
 
 WORKDIR /var/www/html
 
