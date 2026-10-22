@@ -1,5 +1,5 @@
 services:
-  app:
+  face_finder_app:
     build:
       context: .
       dockerfile: Dockerfile
@@ -25,7 +25,7 @@ services:
     volumes:
       - laravel_storage:/var/www/html/storage:ro
     depends_on:
-      - app
+      - face_finder_app
     networks:
       - laravel-net
       - coolify
@@ -53,7 +53,7 @@ services:
     restart: unless-stopped
     command: ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf", "-n"]
     depends_on:
-      app:
+      face_finder_app:
         condition: service_started
       face-recognition-apis:
         condition: service_healthy
@@ -73,7 +73,7 @@ services:
       - laravel-net
       - coolify
     depends_on:
-      - app
+      - face_finder_app
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8005/docs"]
       interval: 10s
